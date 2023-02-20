@@ -53,9 +53,56 @@
     {% endwith %}
     {% endfor %}
     <div class="col-12 text-end">
-      <div class="h6 fw-bold">Sub Total: $<div id="subtotal" class="d-inline-flex">{{basket.get_total_price}}</div></div>
+      <div class="h6 fw-bold">Total price: $<div id="subtotal" class="d-inline-flex">{{basket.get_total_price}}</div></div>
     </div>
   </div>
 </main>
+
+<script>
+//delete
+    $(document).on('click', '.delete-button', function(e) {
+        e.preventDefault();
+        var prodid = $(this).data('index');
+        $.ajax({
+            type: 'POST',
+            url: '{% url "basket:basket_delete" %}',
+            data: {
+                productid: $(this).data('index'),
+                csrfmiddlewaretoken: "{{ csrf_token }}",
+                action: 'post',
+                },
+            success: function(json) {
+                $('.product-item[data-index=" + prodid + "]').remove();
+                document.getElementById('subtotal').innerHTML = json.subtotal
+                document.getElementById("basket-qty").innerHTML = json.qty
+            },
+            error: function(xhr, err, errmsg){}
+        })
+    })
+
+
+//update
+
+ // Update Item
+  $(document).on('click', '.update-button', function (e) {
+    e.preventDefault();
+    var prodid = $(this).data('index');
+    $.ajax({
+      type: 'POST',
+      url: '{% url "basket:basket_update" %}',
+      data: {
+        productid: $(this).data('index'),
+        productqty: $('#select' + prodid + ' option:selected').text(),
+        csrfmiddlewaretoken: "{{csrf_token}}",
+        action: 'post'
+      },
+      success: function (json) {
+        document.getElementById("basket-qty").innerHTML = json.qty
+        document.getElementById("subtotal").innerHTML = json.subtotal
+      },
+      error: function (xhr, errmsg, err) {}
+    });
+  })
+</script>
 
 {% endblock %}
