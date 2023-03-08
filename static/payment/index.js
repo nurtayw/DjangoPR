@@ -1,11 +1,11 @@
-var stripe = Stripe('secret key');
+let stripe = Stripe('pk_test_51MeGJpIG6iYiFUbaIobIBXCSuSzXZea0wToMDNxGsGOeg2aEztxCRfMPe59ICUGgiJglpgsMp7lHC5lHNIvPzEOo00376jyI5R');
 
-var elem = document.getElementById('submit');
+let elem = document.getElementById('submit');
 clientsecret = elem.getAttribute('data-secret');
 
 // Set up Stripe.js and Elements to use in checkout form
-var elements = stripe.elements();
-    var style = {
+let elements = stripe.elements();
+    let style = {
         base: {
           color: "#000",
           lineHeight: '2.4',
@@ -14,11 +14,11 @@ var elements = stripe.elements();
 };
 
 
-var card = elements.create("card", { style: style });
+let card = elements.create("card", { style: style });
 card.mount("#card-element");
 
 card.on('change', function(event) {
-    var displayError = document.getElementById('card-errors')
+    let displayError = document.getElementById('card-errors')
     if (event.error) {
       displayError.textContent = event.error.message;
       $('#card-errors').addClass('alert alert-info');
@@ -28,15 +28,15 @@ card.on('change', function(event) {
     }
 });
 
-var form = document.getElementById('payment-form');
+let form = document.getElementById('payment-form');
 
 form.addEventListener('submit', function(ev) {
 ev.preventDefault();
 
-var custName = document.getElementById("custName").value;
-var custAdd = document.getElementById("custAdd").value;
-var custAdd2 = document.getElementById("custAdd2").value;
-var postCode = document.getElementById("postCode").value;
+let custName = document.getElementById("custName").value;
+let custAdd = document.getElementById("custAdd").value;
+let custAdd2 = document.getElementById("custAdd2").value;
+let postCode = document.getElementById("postCode").value;
 
 
   $.ajax({
