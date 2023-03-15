@@ -12,8 +12,6 @@ let elements = stripe.elements();
           fontSize: '16px'
     }
 };
-
-
 let card = elements.create("card", { style: style });
 card.mount("#card-element");
 
@@ -31,17 +29,17 @@ card.on('change', function(event) {
 let form = document.getElementById('payment-form');
 
 form.addEventListener('submit', function(ev) {
-ev.preventDefault();
+    ev.preventDefault();
 
 let custName = document.getElementById("custName").value;
 let custAdd = document.getElementById("custAdd").value;
 let custAdd2 = document.getElementById("custAdd2").value;
-let postCode = document.getElementById("postCode").value;
+let postCode = document.getElementById("pos tCode").value;
 
 
   $.ajax({
     type: "POST",
-    url: 'http://127.0.0.1:8000/orders/add/',
+    url: 'http://127.0.0.1:8000/order/add/',
     data: {
       order_key: clientsecret,
       csrfmiddlewaretoken: CSRF_TOKEN,

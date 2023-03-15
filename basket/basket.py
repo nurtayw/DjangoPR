@@ -90,7 +90,7 @@ class Basket():
 
     def clear(self):
         # Remove basket from session
-        del self.session['skey']
+        del self.session[settings.BASKET_SESSION_ID]
         self.save()
 
     def save(self):
