@@ -39,7 +39,7 @@ def edit_details(request):
 
 @login_required
 def delete_user(request):
-    user = Customer.objects.get(user_name=request.user)
+    user = Customer.objects.get(name=request.user)
     user.is_active = False
     user.save()
     logout(request)
