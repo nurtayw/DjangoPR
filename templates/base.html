@@ -1,7 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8"/>
     <title>{% block title %}Store{% endblock %}</title>
@@ -16,10 +15,9 @@
     <link rel="stylesheet" href="{% static 'core/css/base.css' %}">
     <link rel="stylesheet" href="{% block stylesheet %}{% endblock %}">
 </head>
-
 <body>
 <header class="pb-3">
-    <nav class="navbar navbar-expand-md navbar-light border-bottom" style="background: #c2c3c4">
+    <nav class="navbar navbar-expand-md navbar-light border-bottom" style="background: #035abe">
         <div class="container-fluid px-md-4">
             <div class="d-flex w-100 navbar-collapse">
                 <a class="navbar-brand d-flex-inline" href="/">
@@ -31,6 +29,7 @@
                     </svg>
                 </a>
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    <li><a class="dropdown-item" href="{% url "store:store_home" %}">Home</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle d-none d-md-block fw500" href="#" id="navbarDropdown"
                            role="button"
@@ -71,10 +70,10 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent2">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle text-reset" href="#" id="navbarDropdown"
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
                                    role="button"
                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    <div class="small text-muted">Hello,
+                                    <div class="small text-dark">Hello,
                                         {% if user.is_authenticated %}
                                             {{ request.user.name }}
                                         {% else %}
@@ -90,7 +89,7 @@
                                             <ul class="list-group list-group-flush dropdown-account-link">
                                                 {% if user.is_authenticated %}
                                                     <a href="{% url "account:dashboard" %}"
-                                                       class="text-reset small list-group-item p-0 pb-1 border-0 dropdown-account-link">Your
+                                                       class="text-reset small list-group-item p-0 pb-1 border-0">Your
                                                         Account</a>
                                                     <a href="#"
                                                        class="text-reset small list-group-item p-0 pb-1 border-0 dropdown-account-link">Orders</a>
@@ -109,7 +108,7 @@
                     </div>
                 </div>
                 <a type="button" role="button" href="{% url "basket:basket_summary" %}"
-                   class="btn btn-outline-secondary border-0 basket-btn">
+                   class="btn btn-outline-dark border-0 basket-btn">
                     {% with total_qty=basket|length %}
                         <div id="basket-qty" class="basket-qty">
                             {% if total_qty > 0 %}
@@ -160,11 +159,11 @@
     </nav>
 </header>
 
-<main class="pt-5">
+<main class="pt-5" style="min-height: 600px;">
     <div id="content">{% block content %} {% endblock %}</div>
 </main>
 
-<footer class="container py-5 footer">
+<footer class="container-fluid" style="background: #035abe;">
     <hr>
     <div class="row pt-4">
         <div class="col-12 col-md">
@@ -178,5 +177,4 @@
     </div>
 </footer>
 </body>
-
 </html>
